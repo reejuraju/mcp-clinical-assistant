@@ -9,21 +9,22 @@ The agent runs via MCP servers that expose scheduling and patient data as tools 
 
 Architecture
 User Query (natural language)
-        │
-        ▼
-  Claude (via API)
-        │
-        ▼
-  MCP Server Layer
-  ┌─────────────────────────────┐
-  │  scheduling-server          │  → appointment availability, bookings
-  │  patient-server             │  → patient lookup, demographics
-  │  practitioner-server        │  → practitioner schedules, availability
-  └─────────────────────────────┘
-        │
-        ▼
-  SaaS Platform
+        |
+        v
+   Claude (via API)
+        |
+        v
+   MCP Server Layer
+   ----------------------------------
+   | scheduling-server              |
+   | patient-server                 |
+   | practitioner-server            |
+   ----------------------------------
+        |
+        v
+   SaaS Platform (REST API)
   (REST API / Database Layer)
+  
 Claude acts as the reasoning layer. The MCP servers act as structured tool interfaces between Claude and the underlying clinical platform. Claude decides which tools to call, in what order, and how to combine results into a coherent response.
 
 MCP Servers
