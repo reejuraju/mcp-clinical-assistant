@@ -8,22 +8,16 @@ Healthcare front-desk workflows involve a lot of repetitive, context-heavy tasks
 The agent runs via MCP servers that expose scheduling and patient data as tools Claude can call. Rather than building a rigid chatbot with fixed intents, the system leverages Claude's reasoning to handle the full range of queries a receptionist would face.
 
 Architecture
-User Query (natural language)
-        |
-        v
-   Claude (via API)
-        |
-        v
-   MCP Server Layer
-   ----------------------------------
-   | scheduling-server              |
-   | patient-server                 |
-   | practitioner-server            |
-   ----------------------------------
-        |
-        v
-   SaaS Platform (REST API)
-  (REST API / Database Layer)
+1. User sends a natural language query (e.g. "Is Dr. Smith available Thursday afternoon?")
+2. Claude receives the query and decides which tools to call and in what order
+3. MCP Server Layer exposes the clinical system as structured tools Claude can invoke:
+
+        scheduling-server — appointment availability and bookings
+        patient-server — patient lookup and demographics
+        practitioner-server — practitioner schedules and availability
+
+4. Clinical SaaS Platform — the underlying REST API that the MCP servers connect to
+Claude combines the results and returns a coherent, contextual response to the user.
   
 Claude acts as the reasoning layer. The MCP servers act as structured tool interfaces between Claude and the underlying clinical platform. Claude decides which tools to call, in what order, and how to combine results into a coherent response.
 
