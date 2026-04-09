@@ -3,7 +3,6 @@ An MCP-based virtual receptionist built on Claude, designed for healthcare pract
 
 ⚠️ This repository documents the architecture and design of a production system. Source code is maintained in a private repository.
 
-
 Overview
 Healthcare front-desk workflows involve a lot of repetitive, context-heavy tasks — checking appointment availability, looking up patient records, handling scheduling conflicts, answering common queries. This project replaces or augments that workflow with a Claude-powered agent that can understand natural language and take action against live clinical systems.
 The agent runs via MCP servers that expose scheduling and patient data as tools Claude can call. Rather than building a rigid chatbot with fixed intents, the system leverages Claude's reasoning to handle the full range of queries a receptionist would face.
@@ -23,7 +22,7 @@ User Query (natural language)
   └─────────────────────────────┘
         │
         ▼
-  SaaS Platform (Gensolve)
+  SaaS Platform
   (REST API / Database Layer)
 Claude acts as the reasoning layer. The MCP servers act as structured tool interfaces between Claude and the underlying clinical platform. Claude decides which tools to call, in what order, and how to combine results into a coherent response.
 
@@ -61,7 +60,7 @@ Agent: Calls lookup_patient → get_upcoming_appointments
        "Sarah Johnson has an appointment on Tuesday 14th at 11:00 AM with Dr. Lee."
 
 Tech Stack
-LayerTechnologyAI / ReasoningClaude (Anthropic API)Agent ProtocolModel Context Protocol (MCP)MCP Server RuntimeNode.js / TypeScriptBackend PlatformC# / .NET CoreClinical PlatformGensolve (REST API)InfrastructureAWS (EC2, RDS, Lambda)
+LayerTechnologyAI / ReasoningClaude (Anthropic API)Agent ProtocolModel Context Protocol (MCP)MCP Server RuntimeNode.js / TypeScriptBackend PlatformC# / .NET CoreClinical PlatformHealthcare SaaS Platform (REST API)InfrastructureAWS (EC2, RDS, Lambda)
 
 Design Decisions
 Why MCP over a traditional function-calling approach?
