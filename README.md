@@ -69,8 +69,30 @@ Related Work
 Other AI features built as part of the same platform:
 
 LLM-powered clinical documentation — auto-generates clinical notes from practitioner inputs using the Claude API
+
 Voice transcription pipeline — converts consultation audio into structured clinical notes (Whisper + post-processing)
 
 
 Status
 Active development. Core scheduling and patient lookup flows are functional. Expanding tool coverage and adding confirmation/rollback flows for write operations.
+
+Prototype:
+
+mcp_receptionist.py is a runnable prototype that demonstrates the agent pattern using mock clinical data. No real patient data is used.
+
+Setup:
+
+        bash
+        pip install anthropic
+        cp .env.example .env   # add your Anthropic API key
+        python mcp_receptionist.py
+
+Example output:
+
+────────────────────────────────────────────────────────────
+
+User: Is Dr. Smith available this Thursday or Friday?
+
+────────────────────────────────────────────────────────────
+
+  [tool] get_available_slots({"practitioner_name": "Dr. Smith"})
